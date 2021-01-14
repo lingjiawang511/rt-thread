@@ -19,6 +19,7 @@
 #endif
 #ifndef RT_CANSND_BOX_NUM
 #define RT_CANSND_BOX_NUM   1
+#define RT_CAN_USING_HDR
 #endif
 
 enum CANBAUD

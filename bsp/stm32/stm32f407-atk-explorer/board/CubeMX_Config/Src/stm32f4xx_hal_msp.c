@@ -1090,6 +1090,80 @@ void HAL_SRAM_MspDeInit(SRAM_HandleTypeDef* hsram){
 
   /* USER CODE END SRAM_MspDeInit 1 */
 }
+//CAN底层驱动，引脚配置，时钟配置，中断配置
+//此函数会被HAL_CAN_Init()调用
+//hcan:CAN句柄
+void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
+{
+    GPIO_InitTypeDef GPIO_InitStruct;
+
+	if(hcan->Instance==CAN1){
+    __HAL_RCC_CAN1_CLK_ENABLE();                //使能CAN1时钟
+    __HAL_RCC_GPIOB_CLK_ENABLE();               //开启GPIOA时钟
+
+    GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9; //PA11,12
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;        //推挽复用
+    GPIO_InitStruct.Pull = GPIO_PULLUP;            //上拉
+    GPIO_InitStruct.Speed = GPIO_SPEED_FAST;       //快速
+    GPIO_InitStruct.Alternate = GPIO_AF9_CAN1;     //复用为CAN1
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);        //初始化
+
+#if CAN1_RX0_INT_ENABLE
+    __HAL_CAN_ENABLE_IT(&CAN1_Handler, CAN_IT_FMP0); //FIFO0消息挂起中断允许.
+    //CAN1->IER|=1<<1;      //FIFO0消息挂起中断允许.
+    HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 1, 2);  //抢占优先级1，子优先级2
+    HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);          //使能中断
+#endif
+	}else if(hcan->Instance==CAN2){
+		__HAL_RCC_CAN1_CLK_ENABLE();
+		__HAL_RCC_CAN2_CLK_ENABLE();
+		__HAL_RCC_GPIOB_CLK_ENABLE(); 
+		
+    GPIO_InitStruct.Pin = GPIO_PIN_12 | GPIO_PIN_13;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Alternate=GPIO_AF9_CAN2;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+#if CAN2_RX0_INT_ENABLE
+    __HAL_CAN_ENABLE_IT(&CAN2_Handler, CAN_IT_FMP0); //FIFO0消息挂起中断允许.
+    //CAN1->IER|=1<<1;      //FIFO0消息挂起中断允许.
+    HAL_NVIC_SetPriority(CAN2_RX0_IRQn, 1, 3);  //抢占优先级1，子优先级2
+    HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);          //使能中断
+#endif	
+	}
+}
+void HAL_CAN_MspDeInit(CAN_HandleTypeDef* hcan)
+{
+ if(hcan->Instance==CAN1)
+  {
+    __HAL_RCC_CAN1_FORCE_RESET();
+    __HAL_RCC_CAN1_RELEASE_RESET();
+  
+    /**CAN GPIO Configuration    
+    PB8     ------> CAN_RX
+    PB9     ------> CAN_TX 
+    */
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_8);
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_9);
+
+    /* Peripheral interrupt Deinit*/
+    HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
+  }else if(hcan->Instance==CAN2){
+    __HAL_RCC_CAN2_FORCE_RESET();
+    __HAL_RCC_CAN2_RELEASE_RESET();
+  
+    /**CAN GPIO Configuration    
+    PB12     ------> CAN_RX
+    PB13     ------> CAN_TX 
+    */
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_12);
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_13);
+
+    /* Peripheral interrupt Deinit*/
+    HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
+  }
+} 
 
 /* USER CODE BEGIN 1 */
 
