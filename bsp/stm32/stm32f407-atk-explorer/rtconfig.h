@@ -6,7 +6,7 @@
 
 /* RT-Thread Kernel */
 
-#define RT_NAME_MAX 8
+#define RT_NAME_MAX 16
 #define RT_ALIGN_SIZE 4
 #define RT_THREAD_PRIORITY_32
 #define RT_THREAD_PRIORITY_MAX 32
@@ -84,6 +84,8 @@
 #define RT_USING_CAN
 #define RT_USING_HWTIMER
 #define RT_USING_PIN
+#define RT_USING_SENSOR
+#define RT_USING_SENSOR_CMD
 
 /* Using USB */
 
@@ -110,6 +112,46 @@
 
 
 /* Utilities */
+
+
+/* Meter core */
+
+#define RT_USING_COMPONENTS_METER_CORE
+
+/* Meter 0001_key component */
+
+
+/* Meter 0002_display */
+
+#define RT_USING_COMPONENTS_METER_DISPLAY
+#define MY_GUI_DISPLAY
+#define RT_USING_COMPONENTS_METER_MYGUI
+
+/* Meter 0003_digital input */
+
+
+/* Meter 0004_anolog input */
+
+
+/* Meter 0005_dew_processing */
+
+
+/* Meter 0006_loadcell_processing */
+
+
+/* Meter 0007_digital_output component */
+
+
+/* Meter 0008_anolog output */
+
+
+/* Meter 0009_charging */
+
+
+/* Meter 0010_data_logging */
+
+
+/* Meter 0011_eeprom */
 
 
 /* RT-Thread online packages */
@@ -148,15 +190,21 @@
 
 /* peripheral libraries and drivers */
 
+#define PKG_USING_SENSORS_DRIVERS
+#define PKG_USING_DHT11
+#define PKG_USING_DHT11_SAMPLE
+#define PKG_USING_DHT11_LATEST_VERSION
+
+/* AI packages */
+
 
 /* miscellaneous packages */
 
 #define PKG_USING_CANFESTIVAL
-#define CANFESTIVAL_CAN_DEVICE_NAME "can1"
+#define CANFESTIVAL_CAN_DEVICE_NAME "bxcan1"
 #define CANFESTIVAL_TIMER_DEVICE_NAME "timer11"
-#define CANFESTIVAL_RECV_THREAD_PRIO 11
-#define CANFESTIVAL_TIMER_THREAD_PRIO 12
-#define CANFESTIVAL_USING_EG_MASTER402
+#define CANFESTIVAL_RECV_THREAD_PRIO 9
+#define CANFESTIVAL_TIMER_THREAD_PRIO 10
 #define PKG_USING_CANFESTIVAL_LATEST_VERSION
 
 /* samples: kernel and components samples */
@@ -174,18 +222,20 @@
 /* Onboard Peripheral Drivers */
 
 #define BSP_USING_USB_TO_USART
+#define BSP_USING_SRAM
 
 /* On-chip Peripheral Drivers */
 
 #define BSP_USING_GPIO
 #define BSP_USING_UART
 #define BSP_USING_UART1
-#define BSP_USING_CAN
-#define BSP_USING_CAN1
 #define BSP_USING_TIM
 #define BSP_USING_TIM11
+#define BSP_USING_EXT_FMC_IO
+#define BSP_USING_FMC
 
 /* Board extended module Drivers */
 
+#define RT_USING_LCD
 
 #endif

@@ -1,0 +1,28 @@
+from building import *
+import rtconfig
+
+# get current dir path
+cwd = GetCurrentDir()
+
+# init src and inc vars
+src = []
+inc = []
+
+# add LittlevGL common include
+inc = inc + [cwd]
+
+# add LittlevGL basic code
+src = src + Glob('./modbus.c')
+src = src + Glob('./relay_dout.c')
+
+
+LOCAL_CCFLAGS = ''
+
+if rtconfig.CROSS_TOOL == 'gcc':
+    LOCAL_CCFLAGS += ' -std=c99'
+elif rtconfig.CROSS_TOOL == 'keil':
+    LOCAL_CCFLAGS += ' --c99 --gnu -g -W'
+
+group = DefineGroup('RTT_METER_DOUT', src, depend = ['RT_USING_COMPONENTS_METER_DOUT'], CPPPATH = inc, LOCAL_CCFLAGS = LOCAL_CCFLAGS)
+
+Return('group')

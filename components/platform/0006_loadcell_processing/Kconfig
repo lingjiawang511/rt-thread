@@ -1,0 +1,7 @@
+menu "Meter 0006_loadcell_processing"
+
+config RT_USING_COMPONENTS_METER_LOADCELL_PROCESSING
+	bool "Use loadcell processing components"
+	default y
+	
+endmenu

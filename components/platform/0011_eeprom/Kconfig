@@ -1,0 +1,7 @@
+menu "Meter 0011_eeprom"
+
+config RT_USING_COMPONENTS_METER_EEPROM
+	bool "Use eeprom components"
+	default y
+	
+endmenu

@@ -1,0 +1,67 @@
+from building import *
+import rtconfig
+
+# get current dir path
+cwd = GetCurrentDir()
+
+# init src and inc vars
+src = []
+inc = []
+
+font_src = Split('''
+./font_export.c
+''')
+font_12_src = Split('''
+./font_12.c
+''')
+font_16_src = Split('''
+./font_16.c
+''')
+font_24_src = Split('''
+./font_24.c
+''')
+font_32_src = Split('''
+./font_32.c
+''')
+font_48_src = Split('''
+./font_48.c
+''')
+font_64_src = Split('''
+./font_64.c
+''')
+font_80_src = Split('''
+./font_80.c
+''')
+
+inc = inc + [cwd]
+
+# add special font source base on configure
+if GetDepend('RT_USING_COMPONENTS_METER_DISPLAY_FONT_12'):
+  font_src = font_src + font_12_src
+if GetDepend('RT_USING_COMPONENTS_METER_DISPLAY_FONT_16'):
+  font_src = font_src + font_16_src
+if GetDepend('RT_USING_COMPONENTS_METER_DISPLAY_FONT_24'):
+  font_src = font_src + font_24_src
+if GetDepend('RT_USING_COMPONENTS_METER_DISPLAY_FONT_32'):
+  font_src = font_src + font_32_src
+if GetDepend('RT_USING_COMPONENTS_METER_DISPLAY_FONT_48'):
+  font_src = font_src + font_48_src
+if GetDepend('RT_USING_COMPONENTS_METER_DISPLAY_FONT_64'):
+  font_src = font_src + font_64_src
+if GetDepend('RT_USING_COMPONENTS_METER_DISPLAY_FONT_80'):
+  font_src = font_src + font_80_src
+
+# On/off conctrl
+if GetDepend('RT_USING_COMPONENTS_METER_DISPLAY_FONT'):
+  src = src + font_src+ Glob('./GUI_UC_EncodeNone.c')
+
+LOCAL_CCFLAGS = ''
+
+if rtconfig.CROSS_TOOL == 'gcc':
+  LOCAL_CCFLAGS += ' -std=c99'
+elif rtconfig.CROSS_TOOL == 'keil':
+  LOCAL_CCFLAGS += ' --c99 --gnu -g -W'
+
+group = DefineGroup('RTT_METER_DISPLAY', src, depend = ['RT_USING_COMPONENTS_METER_DISPLAY'], CPPPATH = inc, LOCAL_CCFLAGS = LOCAL_CCFLAGS)
+
+Return('group')

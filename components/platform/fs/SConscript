@@ -1,0 +1,32 @@
+import os
+from building import *
+import rtconfig
+
+Import('SDK_LIB')
+# get current dir path
+cwd = GetCurrentDir()
+
+# init src and inc vars
+src = []
+inc = []
+
+# add LittlevGL common include
+inc = inc + [cwd]
+inc = inc + [cwd + '/fatfs']
+inc = inc + [cwd + '/fatfs/exfuns']
+inc = inc + [cwd + '/fatfs/option']
+# add emwin gui basic code
+if GetDepend('RT_USING_COMPONENTS_METER_MYGUI'):
+  src = src
+
+LOCAL_CCFLAGS = ''
+startup_path_prefix = SDK_LIB
+
+if rtconfig.CROSS_TOOL == 'gcc':
+    LOCAL_CCFLAGS += ' -std=c99'
+elif rtconfig.CROSS_TOOL == 'keil':
+    LOCAL_CCFLAGS += ' --c99 --gnu -g -W'
+
+group = DefineGroup('RTT_METER_DISPLAY', src, depend = ['RT_USING_COMPONENTS_METER_DISPLAY'], CPPPATH = inc, LOCAL_CCFLAGS = LOCAL_CCFLAGS)
+
+Return('group')

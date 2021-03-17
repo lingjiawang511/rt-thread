@@ -1,0 +1,7 @@
+menu "Meter 0010_data_logging"
+
+config RT_USING_COMPONENTS_METER_LOGGING
+	bool "Use data logging components"
+	default y
+	
+endmenu

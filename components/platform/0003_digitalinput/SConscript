@@ -1,0 +1,28 @@
+from building import *
+import rtconfig
+
+# get current dir path
+cwd = GetCurrentDir()
+
+# init src and inc vars
+src = []
+inc = []
+
+inc = inc + [cwd]
+
+# Add one sensor in bellow configure
+if GetDepend('RT_USING_COMPONENTS_METER_DIN_SRT20X68'):
+		src = src + Glob('./SRT-20X68.c')
+if GetDepend('RT_USING_COMPONENTS_METER_DIN_HC4'):
+		src = src + Glob('./HC4.c')
+
+LOCAL_CCFLAGS = ''
+
+if rtconfig.CROSS_TOOL == 'gcc':
+    LOCAL_CCFLAGS += ' -std=c99'
+elif rtconfig.CROSS_TOOL == 'keil':
+    LOCAL_CCFLAGS += ' --c99 --gnu -g -W'
+
+group = DefineGroup('RTT_METER_DIN', src, depend = ['RT_USING_COMPONENTS_METER_DIN'], CPPPATH = inc, LOCAL_CCFLAGS = LOCAL_CCFLAGS)
+
+Return('group')

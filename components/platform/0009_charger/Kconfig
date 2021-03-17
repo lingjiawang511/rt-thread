@@ -1,0 +1,7 @@
+menu "Meter 0009_charging"
+
+config RT_USING_COMPONENTS_METER_CHARGING
+	bool "Use charging components"
+	default y
+	
+endmenu

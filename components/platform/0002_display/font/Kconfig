@@ -1,0 +1,29 @@
+if EMWIN_DISPLAY
+    config RT_USING_COMPONENTS_METER_DISPLAY_FONT
+        bool "Use font for to support show text"
+        default y
+endif
+if RT_USING_COMPONENTS_METER_DISPLAY_FONT
+    config RT_USING_COMPONENTS_METER_DISPLAY_FONT_12
+        bool "Use 12 font"
+        default y
+    config RT_USING_COMPONENTS_METER_DISPLAY_FONT_16
+        bool "Use 16 font"
+        default y
+    config RT_USING_COMPONENTS_METER_DISPLAY_FONT_24
+        bool "Use 24 font"
+        default y
+    config RT_USING_COMPONENTS_METER_DISPLAY_FONT_32
+        bool "Use 32 font"
+        default y
+    config RT_USING_COMPONENTS_METER_DISPLAY_FONT_48
+        bool "Use 48 font"
+        default y
+    config RT_USING_COMPONENTS_METER_DISPLAY_FONT_64
+        bool "Use 64 font"
+        default y
+    config RT_USING_COMPONENTS_METER_DISPLAY_FONT_80
+        bool "Use 80 font"
+        default y
+endif
+

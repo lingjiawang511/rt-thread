@@ -1,0 +1,7 @@
+menu "Meter 0001_key component"
+
+config RT_USING_COMPONENTS_METER_KEY
+	bool "Use meter key components"
+	default y
+	
+endmenu

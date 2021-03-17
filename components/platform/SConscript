@@ -1,0 +1,16 @@
+from building import *
+Import('RTT_ROOT')
+import rtconfig
+
+# get current dir path
+cwd = GetCurrentDir()
+
+objs = []
+list = os.listdir(os.path.join(RTT_ROOT, 'components', 'platform'))
+
+for d in list:
+    path = os.path.join(RTT_ROOT, 'components', 'platform', d)
+    if os.path.isfile(os.path.join(path, 'SConscript')):
+        objs = objs + SConscript(os.path.join(d, 'SConscript'))
+
+Return('objs')

@@ -1,0 +1,7 @@
+menu "Meter 0008_anolog output"
+
+config RT_USING_COMPONENTS_METER_AOUT
+	bool "Use anolog output components"
+	default y
+	
+endmenu

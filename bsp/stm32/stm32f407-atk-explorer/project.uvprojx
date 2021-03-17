@@ -52,9 +52,9 @@
           <OutputName>rt-thread</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>1</CreateHexFile>
+          <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
-          <BrowseInformation>1</BrowseInformation>
+          <BrowseInformation>0</BrowseInformation>
           <ListingPath>.\build\keil\List\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32F407xx, __RTTHREAD__</Define>
               <Undefine></Undefine>
-              <IncludePath>applications;.;packages\CanFestival-latest\inc;..\..\..\libcpu\arm\common;..\..\..\libcpu\arm\cortex-m4;..\..\..\components\drivers\include;..\..\..\components\drivers\include;..\..\..\components\drivers\include;..\..\..\components\drivers\include;..\..\..\components\drivers\include;board;board\CubeMX_Config\Inc;board\ports;..\libraries\HAL_Drivers;..\libraries\HAL_Drivers\config;..\..\..\components\finsh;.;..\..\..\include;..\..\..\components\libc\compilers\common;..\libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Inc;..\libraries\STM32F4xx_HAL\CMSIS\Device\ST\STM32F4xx\Include;..\libraries\STM32F4xx_HAL\CMSIS\Include;packages\CanFestival-latest\examples\master402</IncludePath>
+              <IncludePath>applications;.;packages\CanFestival-latest\inc;..\..\..\libcpu\arm\common;..\..\..\libcpu\arm\cortex-m4;..\..\..\components\drivers\include;..\..\..\components\drivers\include;..\..\..\components\drivers\include;..\..\..\components\drivers\include;..\..\..\components\drivers\include;packages\dht11-latest;board;board\CubeMX_Config\Inc;board\ports;board\drivers;..\libraries\HAL_Drivers;..\libraries\HAL_Drivers\config;..\..\..\components\finsh;.;..\..\..\include;..\..\..\components\libc\compilers\common;..\libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Inc;..\libraries\STM32F4xx_HAL\CMSIS\Device\ST\STM32F4xx\Include;..\libraries\STM32F4xx_HAL\CMSIS\Include;..\..\..\components\platform\0002_display\font;..\..\..\components\platform\0002_display\mygui;..\..\..\components\platform\0002_display\STemWinLibrary532;..\..\..\components\platform\0002_display\STemWinLibrary532\inc;..\..\..\components\platform\0002_display\STemWinLibrary532\Config;..\..\..\components\platform\fs;..\..\..\components\platform\fs\fatfs;..\..\..\components\platform\fs\fatfs\exfuns;..\..\..\components\platform\fs\fatfs\option;..\..\..\components\drivers\sensors;..\..\..\components\drivers\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -545,6 +545,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>dht11</GroupName>
+          <Files>
+            <File>
+              <FileName>sensor_dallas_dht11.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\dht11-latest\sensor_dallas_dht11.c</FilePath>
+            </File>
+            <File>
+              <FileName>dht11_sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\dht11-latest\dht11_sample.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
@@ -556,6 +571,16 @@
               <FileName>stm32f4xx_hal_msp.c</FileName>
               <FileType>1</FileType>
               <FilePath>board\CubeMX_Config\Src\stm32f4xx_hal_msp.c</FilePath>
+            </File>
+            <File>
+              <FileName>drv_sram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>board\ports\drv_sram.c</FilePath>
+            </File>
+            <File>
+              <FileName>drv_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>board\drivers\drv_lcd.c</FilePath>
             </File>
             <File>
               <FileName>startup_stm32f407xx.s</FileName>
@@ -797,30 +822,129 @@
               <FileType>1</FileType>
               <FilePath>..\libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_lptim.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_ll_fmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_fsmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_sram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\libraries\STM32F4xx_HAL\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sram.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Master402</GroupName>
+          <GroupName>RTT_METER_DISPLAY</GroupName>
+          <GroupOption>
+            <CommonProperty>
+              <UseCPPCompiler>0</UseCPPCompiler>
+              <RVCTCodeConst>0</RVCTCodeConst>
+              <RVCTZI>0</RVCTZI>
+              <RVCTOtherData>0</RVCTOtherData>
+              <ModuleSelection>0</ModuleSelection>
+              <IncludeInBuild>1</IncludeInBuild>
+              <AlwaysBuild>0</AlwaysBuild>
+              <GenerateAssemblyFile>0</GenerateAssemblyFile>
+              <AssembleAssemblyFile>0</AssembleAssemblyFile>
+              <PublicsOnly>0</PublicsOnly>
+              <StopOnExitCode>3</StopOnExitCode>
+              <CustomArgument></CustomArgument>
+              <IncludeLibraryModules></IncludeLibraryModules>
+              <ComprImg>0</ComprImg>
+            </CommonProperty>
+            <GroupArmAds>
+              <Cads>
+                <interw>2</interw>
+                <Optim>0</Optim>
+                <oTime>2</oTime>
+                <SplitLS>2</SplitLS>
+                <OneElfS>2</OneElfS>
+                <Strict>2</Strict>
+                <EnumInt>2</EnumInt>
+                <PlainCh>2</PlainCh>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <wLevel>0</wLevel>
+                <uThumb>2</uThumb>
+                <uSurpInc>2</uSurpInc>
+                <uC99>2</uC99>
+                <uGnu>2</uGnu>
+                <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>2</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
+                <VariousControls>
+                  <MiscControls> --c99 --gnu -g -W --c99 --gnu -g -W --c99 --gnu -g -W --c99 --gnu -g -W</MiscControls>
+                  <Define> </Define>
+                  <Undefine> </Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Cads>
+              <Aads>
+                <interw>2</interw>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <thumb>2</thumb>
+                <SplitLS>2</SplitLS>
+                <SwStkChk>2</SwStkChk>
+                <NoWarn>2</NoWarn>
+                <uSurpInc>2</uSurpInc>
+                <useXO>2</useXO>
+                <uClangAs>2</uClangAs>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Aads>
+            </GroupArmAds>
+          </GroupOption>
           <Files>
             <File>
-              <FileName>canopen_callback.c</FileName>
+              <FileName>Display_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\CanFestival-latest\examples\master402\canopen_callback.c</FilePath>
+              <FilePath>..\..\..\components\platform\0002_display\mygui\Display_app.c</FilePath>
             </File>
             <File>
-              <FileName>master402_canopen.c</FileName>
+              <FileName>GUI.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\CanFestival-latest\examples\master402\master402_canopen.c</FilePath>
+              <FilePath>..\..\..\components\platform\0002_display\mygui\GUI.c</FilePath>
             </File>
             <File>
-              <FileName>master402_od.c</FileName>
+              <FileName>mystdio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\CanFestival-latest\examples\master402\master402_od.c</FilePath>
+              <FilePath>..\..\..\components\platform\0002_display\mygui\mystdio.c</FilePath>
             </File>
             <File>
-              <FileName>motor_control.c</FileName>
+              <FileName>STemWin532_CM4_OS_Keil.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\components\platform\0002_display\STemWinLibrary532\Lib\STemWin532_CM4_OS_Keil.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Sensors</GroupName>
+          <Files>
+            <File>
+              <FileName>sensor.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\CanFestival-latest\examples\master402\motor_control.c</FilePath>
+              <FilePath>..\..\..\components\drivers\sensors\sensor.c</FilePath>
+            </File>
+            <File>
+              <FileName>sensor_cmd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\components\drivers\sensors\sensor_cmd.c</FilePath>
             </File>
           </Files>
         </Group>

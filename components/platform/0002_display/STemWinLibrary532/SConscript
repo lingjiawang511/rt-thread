@@ -1,0 +1,43 @@
+from building import *
+import rtconfig
+
+# get current dir path
+cwd = GetCurrentDir()
+
+# init src and inc vars
+src = []
+inc = []
+
+emwin_src = Split('''
+./OS/GUI_X_OS_RTTHREAD.c
+./Config/GUIConf.c
+./Config/GUIDRV_Template.c
+./Config/LCDConf_FlexColor_Template.c
+./App/GUIDEMO_Start.c
+./App/MainFormDLG.c
+''')
+
+# add LittlevGL common include
+inc = inc + [cwd]
+inc = inc + [cwd + '/inc']
+inc = inc + [cwd + '/Config']
+
+# add emwin gui basic code
+if GetDepend('RT_USING_COMPONENTS_METER_DISPLAY_EMWINGUI'):
+  src = src + emwin_src
+
+if rtconfig.CROSS_TOOL == 'keil':
+  LIBS = ['STemWin532_CM4_OS_Keil']
+if rtconfig.CROSS_TOOL == 'gcc':
+  LIBS = ['STemWin532_CM4_OS_GCC']
+LIBPATH = [cwd+ '/Lib']
+LOCAL_CCFLAGS = ''
+
+if rtconfig.CROSS_TOOL == 'gcc':
+  LOCAL_CCFLAGS += ' -std=c99'
+elif rtconfig.CROSS_TOOL == 'keil':
+  LOCAL_CCFLAGS += ' --c99 --gnu -g -W'
+
+group = DefineGroup('RTT_METER_DISPLAY', src, depend = ['RT_USING_COMPONENTS_METER_DISPLAY'], CPPPATH = inc, LOCAL_CCFLAGS = LOCAL_CCFLAGS, LIBS = LIBS, LIBPATH = LIBPATH)
+
+Return('group')

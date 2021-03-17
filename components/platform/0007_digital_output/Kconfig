@@ -1,0 +1,7 @@
+menu "Meter 0007_digital_output component"
+
+config RT_USING_COMPONENTS_METER_DOUT
+	bool "Use digital out components"
+	default y
+
+endmenu

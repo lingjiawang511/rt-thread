@@ -1,0 +1,21 @@
+menu "Meter core"
+
+config RT_USING_COMPONENTS_METER_CORE
+    bool "Use METER_CORE components"
+    default y
+	if RT_USING_COMPONENTS_METER_CORE
+		source "$RTT_DIR/components/platform/0001_key/Kconfig"
+		source "$RTT_DIR/components/platform/0002_display/Kconfig"
+		source "$RTT_DIR/components/platform/0003_digitalinput/Kconfig"
+		source "$RTT_DIR/components/platform/0004_anologinput/Kconfig"
+		source "$RTT_DIR/components/platform/0005_dew_processing/Kconfig"
+		source "$RTT_DIR/components/platform/0006_loadcell_processing/Kconfig"
+		source "$RTT_DIR/components/platform/0007_digital_output/Kconfig"
+		source "$RTT_DIR/components/platform/0008_analog_output/Kconfig"
+		source "$RTT_DIR/components/platform/0009_charger/Kconfig"
+		source "$RTT_DIR/components/platform/0010_data_logging/Kconfig"
+		source "$RTT_DIR/components/platform/0011_eeprom/Kconfig"
+	endif
+endmenu
+
+

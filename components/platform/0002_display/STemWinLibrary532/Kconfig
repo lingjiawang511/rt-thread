@@ -1,0 +1,4 @@
+
+config RT_USING_COMPONENTS_METER_DISPLAY_EMWINGUI
+	bool "Use emwin gui library"
+	default y

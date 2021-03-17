@@ -1,0 +1,24 @@
+menu "Meter 0002_display"
+
+config RT_USING_COMPONENTS_METER_DISPLAY
+  bool "Use meter display components"
+  default y
+choice
+    prompt "Use witch gui display"
+    default MY_GUI_DISPLAY
+    config MY_GUI_DISPLAY
+        bool "my_gui display"
+    config EMWIN_DISPLAY
+        bool "emwin_display"
+endchoice
+
+if RT_USING_COMPONENTS_METER_DISPLAY
+  	if MY_GUI_DISPLAY
+		source "$RTT_DIR/components/platform/0002_display/mygui/Kconfig"
+	endif
+	if EMWIN_DISPLAY
+		source "$RTT_DIR/components/platform/0002_display/STemWinLibrary532/Kconfig"
+		source "$RTT_DIR/components/platform/0002_display/font/Kconfig"
+	endif
+endif
+endmenu

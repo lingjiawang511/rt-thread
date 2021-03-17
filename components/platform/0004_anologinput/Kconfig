@@ -1,0 +1,16 @@
+menu "Meter 0004_anolog input"
+
+config RT_USING_COMPONENTS_METER_AIN
+	bool "Use anolog input components"
+	default y
+	
+if RT_USING_COMPONENTS_METER_AIN
+config RT_USING_ADC
+	bool "Use on chip adc for anolog input"
+	default y
+config RT_USING_COMPONENTS_METER_ADIN_EXTERNAL
+	bool "Use external adc for anolog input"
+	default n
+endif
+
+endmenu

@@ -1,0 +1,7 @@
+menu "Meter 0005_dew_processing"
+
+config RT_USING_COMPONENTS_METER_DEW_PROCESSING
+	bool "Use meter dew processing components"
+	default y
+	
+endmenu

@@ -23,10 +23,13 @@ if GetDepend(['BSP_USING_SDCARD']):
 
 if GetDepend(['BSP_USING_SRAM']):
     src += Glob('ports/drv_sram.c')
+if GetDepend(['RT_USING_LCD']):
+    src += Glob('drivers/drv_lcd.c')
 
 path =  [cwd]
 path += [cwd + '/CubeMX_Config/Inc']
 path += [cwd + '/ports']
+path += [cwd + '/drivers']
 
 startup_path_prefix = SDK_LIB
 

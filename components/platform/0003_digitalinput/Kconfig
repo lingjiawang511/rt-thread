@@ -1,0 +1,16 @@
+menu "Meter 0003_digital input"
+
+config RT_USING_COMPONENTS_METER_DIN
+	bool "Use digital input components"
+	default y
+
+if RT_USING_COMPONENTS_METER_DIN
+config RT_USING_COMPONENTS_METER_DIN_SRT20X68
+	bool "Use srt20x68 digital input sensor"
+	default y
+config RT_USING_COMPONENTS_METER_DIN_HC4
+	bool "Use HC4 digital input sensor"
+	default n
+endif
+	
+endmenu
